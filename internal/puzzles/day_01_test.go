@@ -46,3 +46,36 @@ func MustReadFileToString(t *testing.T, filename string) string {
 
 	return string(contents)
 }
+
+func TestTrebuchetPuzzle_SolvePartTwo(t *testing.T) {
+	type args struct {
+		input string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "example input",
+			args: args{
+				input: MustReadFileToString(t, "inputs/example.day_01_part_2.txt"),
+			},
+			want: 281,
+		},
+		{
+			name: "real input case that will fail",
+			args: args{
+				input: MustReadFileToString(t, "inputs/day_01_part_2.txt"),
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			p := &TrebuchetPuzzle{}
+			if got := p.SolvePartTwo(tt.args.input); got != tt.want {
+				t.Errorf("SolvePartTwo()\n got = %v\nwant %v", got, tt.want)
+			}
+		})
+	}
+}
